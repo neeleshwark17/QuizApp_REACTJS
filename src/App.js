@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   const questions = [
@@ -62,37 +61,60 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      {showScore ? (               //if showScore=true then show the scores.... else show the questions
-        <div className="score-section">
-          You scored {score} out of {questions.length}
-        </div>
-      ) : (
-        <div>
+    <div className="container row" style={{ background: "" }}>
+      <div className="col-lg-5"></div>
+      <div
+        className="app"
+        style={{
+          borderRadius: "10%",
+          padding: "5%",
+          marginTop: "10%",
+          background: "#E0FFFF",
+          height: "20%",
+          width: "40%",
+        }}
+      >
+        {showScore ? ( //if showScore=true then show the scores.... else show the questions
+          <div className="score-section">
+            You scored {score} out of {questions.length}
+          </div>
+        ) : (
           <div>
             <div>
-              <span>Question {currentQuestion + 1}</span>/{questions.length}  //questions
-            </div>
-            <div>{questions[currentQuestion].questionText}</div>
-          </div>
-          <div>
-            {questions[currentQuestion].answerOptions.map((answerOption) => (         ///map through the array of questions showing answerOptions alongSide
               <div>
-                <button
-                  style={{ margin: "10px" }}
-                  className="btn btn-primary"
-                  onClick={() =>
-                    handleAnswerButtonClick(answerOption.isCorrect)       //handleAnswerButtonClick function takes an argument of isCorrect to check the answer is correct or not
-                  }                                                       //if answer is correct increment score
-                >
-                  {answerOption.answerText}
-                </button>
-                <br />
+                <span style={{ fontFamily: "cursive" }}>
+                  Question {currentQuestion + 1}
+                </span>
+                /{questions.length}{" "}
               </div>
-            ))}
+              <div style={{ fontFamily: "cursive" }}>
+                {questions[currentQuestion].questionText}
+              </div>
+            </div>
+            <div className="row" style={{ marginTop: "10%" }}>
+              <div className="col-lg-4"></div>
+              <div style={{ marginTop: "0%" }}>
+                {questions[currentQuestion].answerOptions.map((
+                  answerOption ///map through the array of questions showing answerOptions alongSide
+                ) => (
+                  <div>
+                    <button
+                      style={{ margin: "10px", height: "40px", width: "100px" }}
+                      className="btn btn-primary"
+                      onClick={
+                        () => handleAnswerButtonClick(answerOption.isCorrect) //handleAnswerButtonClick function takes an argument of isCorrect to check the answer is correct or not
+                      } //if answer is correct increment score
+                    >
+                      {answerOption.answerText}
+                    </button>
+                    <br />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
